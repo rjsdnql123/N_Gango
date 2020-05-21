@@ -6,20 +6,17 @@ const cors = require('cors');
 // const router = express.Router()
 const { Users } = sequelize;
 const userRouter = require('./routes/user');
-const stuffRouter = require("./routes/stuff");
-
+const mypageRouter = require('./routes/mypage');
+const stuffRouter = require('./routes/stuff');
 const PORT = process.env.PORT || '3001';
 
-
-
-
-
 const app = express();
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
 
-app.use('/user', userRouter)
-app.use("/stuff", stuffRouter);
+app.use('/user', userRouter);
+app.use('/mypage', mypageRouter);
+app.use('/stuff', stuffRouter);
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send('Success');

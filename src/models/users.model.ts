@@ -14,6 +14,7 @@ import Stuffs from './stuffs.model';
 import UserStuff from './user_stuff.model';
 import Recipes from './recipes.model';
 import Comments from './comments.model';
+import Like from './like.model';
 
 @Table
 export default class Users extends Model<Users> {
@@ -38,14 +39,16 @@ export default class Users extends Model<Users> {
   @BelongsToMany(
     () => Users,
     () => Follow,
-    'userId'
+    'userId',
+    'id'
   )
   followers: Users[];
 
   @BelongsToMany(
     () => Users,
     () => Follow,
-    'followId'
+    'followId',
+    'id'
   )
   followings: Users[];
 
@@ -60,6 +63,13 @@ export default class Users extends Model<Users> {
 
   @HasMany(() => Comments)
   comments: Comments[];
+
+  @BelongsToMany(
+    () => Recipes,
+    () => Like,
+    'userId'
+  )
+  likes: Recipes[];
 
   @BeforeValidate
   static setPassword(instance: Users) {

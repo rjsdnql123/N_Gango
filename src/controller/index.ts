@@ -1,4 +1,5 @@
 module.exports = {
-  userController: require("./user"),
-  stuffController: require("./stuff"),
+  userController: require('./user'),
+  mypageController: require('./mypage'),
+  stuffController: require('./stuff'),
 };

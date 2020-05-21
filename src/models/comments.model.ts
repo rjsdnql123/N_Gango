@@ -5,6 +5,7 @@ import {
   UpdatedAt,
   ForeignKey,
   Column,
+  BelongsTo,
 } from 'sequelize-typescript';
 
 import Users from './users.model';
@@ -28,4 +29,10 @@ export default class Comments extends Model<Comments> {
 
   @UpdatedAt
   updatedAt: Date;
+
+  @BelongsTo(() => Recipes)
+  recipe: Recipes;
+
+  @BelongsTo(() => Users)
+  user: Users;
 }
