@@ -5,7 +5,7 @@ const sequelize = new Sequelize({
   database: 'Njango',
   dialect: 'mysql',
   username: 'root',
-  password: '[dnjs1541]',
+  password: process.env.DB_PASSWORD,
   models: [__dirname + '/*.model.ts'], // or [Player, Team],
 });
 sequelize.sync({ force: true });
