@@ -1,5 +1,5 @@
 import express from 'express';
-import sequelize from './model';
+import sequelize from './models';
 const { Users } = sequelize;
 
 const PORT = process.env.PORT || '3001';
@@ -12,7 +12,7 @@ app.get('/', (req: express.Request, res: express.Response) => {
     email: 'test',
     password: '1234',
     username: 'nameOfUser',
-    token: 'A73628ANDJS'
+    token: 'A73628ANDJS',
   });
   res.send('Success');
 });
