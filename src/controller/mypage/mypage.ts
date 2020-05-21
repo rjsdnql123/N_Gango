@@ -1,6 +1,5 @@
 import { Request, Response } from 'express';
 import sequelize from '../../models';
-import { jwtVerify } from '../../middleware/jwt';
 const { Users, Stuffs, Comments, Recipes, Like } = sequelize;
 
 const mypage = async function(req: Request, res: Response) {
