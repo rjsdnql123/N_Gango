@@ -1,5 +1,5 @@
-import express, { Request, Response, NextFunction } from 'express';
-import sequelize from '../../model';
+import express, { Request, Response, NextFunction } from "express"
+import sequelize from "../../models";
 const { Users } = sequelize;
 
 const signup = async function(req: Request, res: Response) {

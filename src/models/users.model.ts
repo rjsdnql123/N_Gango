@@ -8,13 +8,12 @@ import {
   HasMany,
   BeforeValidate,
 } from 'sequelize-typescript';
-
+import { hashing } from '../helper/crypto';
 import Follow from './follow.model';
 import Stuffs from './stuffs.model';
 import UserStuff from './user_stuff.model';
 import Recipes from './recipes.model';
 import Comments from './comments.model';
-import { hashing } from '../helper/crypto';
 
 @Table
 export default class Users extends Model<Users> {
