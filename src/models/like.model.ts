@@ -5,12 +5,17 @@ import {
   CreatedAt,
   UpdatedAt,
   ForeignKey,
+  PrimaryKey,
 } from 'sequelize-typescript';
 import Users from './users.model';
 import Recipes from './recipes.model';
 
 @Table
 export default class Like extends Model<Like> {
+  @PrimaryKey
+  @Column({ autoIncrement: true })
+  id: number;
+
   @ForeignKey(() => Users)
   @Column
   userId: number;

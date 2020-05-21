@@ -6,6 +6,8 @@ import {
   ForeignKey,
   Column,
   HasMany,
+  BelongsToMany,
+  BelongsTo,
 } from 'sequelize-typescript';
 
 import Users from './users.model';
@@ -33,9 +35,16 @@ export default class Recipes extends Model<Recipes> {
   @UpdatedAt
   updatedAt: Date;
 
+  @BelongsTo(() => Users)
+  makeUser: Users;
+
   @HasMany(() => Comments)
   comments: Comments[];
 
-  @HasMany(() => Like)
-  likes: Like[];
+  @BelongsToMany(
+    () => Users,
+    () => Like,
+    'recipeId'
+  )
+  likes: Users[];
 }
