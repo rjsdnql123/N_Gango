@@ -7,5 +7,5 @@ router.post("/category", stuffController.category);
 
 router.post("/stuff", stuffController.stuff);
 
-router.get("/stuffget", stuffController.stuffget);
+// router.post("/search", stuffController.search);
 module.exports = router;
