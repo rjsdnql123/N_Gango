@@ -1,5 +1,5 @@
 import { Request, Response, NextFunction } from 'express';
-import sequelize from '../../model';
+import sequelize from '../../models';
 import { jwtSign } from '../../middleware/jwt';
 import { hashing } from '../../helper/crypto';
 const { Users } = sequelize;
