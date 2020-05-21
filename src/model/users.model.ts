@@ -6,8 +6,9 @@ import {
   UpdatedAt,
   BelongsToMany,
   HasMany,
+  BeforeValidate,
 } from 'sequelize-typescript';
-
+import { hashing } from '../helper/crypto';
 import Follow from './follow.model';
 import Stuffs from './stuffs.model';
 import UserStuff from './user_stuff.model';
@@ -59,4 +60,9 @@ export default class Users extends Model<Users> {
 
   @HasMany(() => Comments)
   comments: Comments[];
+
+  @BeforeValidate
+  static setPassword(instance: Users) {
+    instance.password = hashing(instance.password);
+  }
 }
