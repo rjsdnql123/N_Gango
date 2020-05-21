@@ -7,4 +7,5 @@ router.post('/category', stuffController.category);
 
 router.post('/stuff', stuffController.stuff);
 
+// router.post("/search", stuffController.search);
 module.exports = router;
