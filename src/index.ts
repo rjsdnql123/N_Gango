@@ -21,6 +21,9 @@ app.use(bodyParser.json());
 app.use('/user', userRouter)
 app.use("/stuff", stuffRouter);
 
+app.get('/', (req: express.Request, res: express.Response) => {
+  res.send('Success');
+});
 
 app.listen(PORT, () => {
   console.log('App started port : ', PORT);
