@@ -1,5 +1,5 @@
 import express from 'express';
-import sequelize from './model';
+import sequelize from './models';
 const bodyParser = require('body-parser');
 const cors = require('cors');
 // const router = express.Router()
@@ -23,6 +23,9 @@ app.use('/user', userRouter)
 // app.get('/signin', signin.get)
 // app.post('/signup', signup.post)
 
+app.get('/', (req: express.Request, res: express.Response) => {
+  res.send('Success');
+});
 
 app.listen(PORT, () => {
   console.log('App started port : ', PORT);
