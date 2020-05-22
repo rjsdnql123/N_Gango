@@ -77,7 +77,7 @@ describe('add stuff test', () => {
     chai
       .request(app)
       .post('/stuff/stuff')
-      .send({ stuffname: '돼지고기', limitday: '7days', category: 1 })
+      .send({ stuffname: '돼지고기', limitday: '7days', categoryId: 1 })
       .end((err, res) => {
         if (err) {
           done(err);
@@ -85,7 +85,7 @@ describe('add stuff test', () => {
         }
         expect(res).to.have.status(200);
         expect(res.body.stuffname).to.equal('돼지고기');
-        expect(res.body.category).to.equal(1);
+        expect(res.body.categoryId).to.equal(1);
         done();
       });
   });
@@ -125,7 +125,29 @@ describe('mypage test', () => {
           done(err);
           return;
         }
-        agent.post('/mypage/stuff').send({ token: res.body.token });
+        expect(res.body).to.have.key('token');
+        agent
+          .post('/mypage/stuff')
+          .send({ token: res.body.token, id: 1 })
+          .end((err2, res2) => {
+            if (err2) {
+              done(err2);
+              return;
+            }
+            expect(res2).to.have.status(201);
+            agent
+              .get('/mypage')
+              .send({ token: res.body.token })
+              .end((err3, res3) => {
+                if (err3) {
+                  done(err3);
+                  return;
+                }
+                expect(res3.body.stuffs.length).to.equal(1);
+                expect(res3.body.stuffs[0].stuffname).to.equal('돼지고기');
+                done();
+              });
+          });
       });
   });
 });
