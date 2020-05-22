@@ -4,7 +4,12 @@ import {
   Model,
   CreatedAt,
   UpdatedAt,
+  HasMany,
+  HasOne,
+  BelongsToMany,
 } from 'sequelize-typescript';
+import Stuffs from './stuffs.model';
+import StuffCategory from './stuff_category.model';
 
 @Table
 export default class Category extends Model<Category> {
@@ -16,4 +21,10 @@ export default class Category extends Model<Category> {
 
   @UpdatedAt
   updatedAt: Date;
+
+  @BelongsToMany(
+    () => Stuffs,
+    () => StuffCategory
+  )
+  stuffs: Stuffs[];
 }
