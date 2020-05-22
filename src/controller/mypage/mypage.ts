@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import sequelize from '../../models';
-const { Users, Stuffs, Comments, Recipes, Like } = sequelize;
+const { Users, Stuffs, Comments, Recipes, Category } = sequelize;
 
 const mypage = async function(req: Request, res: Response) {
   try {
