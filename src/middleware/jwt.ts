@@ -2,10 +2,23 @@ import { Request, Response, NextFunction } from 'express';
 import * as jwt from 'jsonwebtoken';
 require('dotenv').config();
 
-export async function jwtVerify(token: string): Promise<any> {
-  const decoded: any = await jwt.verify(token, process.env.TOKEN);
-  console.log(decoded);
-  return decoded;
+export async function jwtVerify(
+  req: Request,
+  res: Response,
+  next: NextFunction
+): Promise<void | Response> {
+  try {
+    const { token } = req.body;
+    if (!token) {
+      return res.status(404).send({ error: { message: 'Login require' } });
+    }
+    const decoded: any = await jwt.verify(token, process.env.TOKEN);
+    req.body.data = decoded.data;
+    next();
+  } catch (error) {
+    console.log(error);
+    res.status(500).send('server error');
+  }
 }
 
 export function jwtSign(verify: any): string {
