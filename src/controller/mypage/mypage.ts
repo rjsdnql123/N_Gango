@@ -8,12 +8,12 @@ const mypage = async function(req: Request, res: Response) {
     const user = await Users.findOne({
       where: { id: data },
       include: [
-        { model: Users, as: 'followers' },
-        { model: Users, as: 'followings' },
-        Stuffs,
-        Comments,
-        { model: Recipes, as: 'recipes' },
-        { model: Recipes, as: 'likes' },
+        { model: Users, as: 'followers', limit: 5 },
+        { model: Users, as: 'followings', limit: 5 },
+        { model: Stuffs, limit: 5 },
+        { model: Comments, limit: 5 },
+        { model: Recipes, as: 'recipes', limit: 5 },
+        { model: Recipes, as: 'likes', limit: 5 },
       ],
     }).then((res): any => res);
     if (!user) {
