@@ -14,11 +14,11 @@ import Recipes from './recipes.model';
 @Table
 export default class Comments extends Model<Comments> {
   @ForeignKey(() => Users)
-  @Column
+  @Column({ onDelete: 'CASCADE' })
   userId: number;
 
   @ForeignKey(() => Recipes)
-  @Column
+  @Column({ onDelete: 'CASCADE' })
   recipId: number;
 
   @Column
