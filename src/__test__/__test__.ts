@@ -2,13 +2,12 @@ import chai, { expect } from 'chai';
 import app from '../index';
 import chaiHttp from 'chai-http';
 
-import sequelize from '../models/index';
+import { sequelize } from '../models/index';
 import Recipes from '../models/recipes.model';
 import Users from '../models/users.model';
 import Comments from '../models/comments.model';
 import Category from '../models/category.model';
 import Stuffs from '../models/stuffs.model';
-import { doesNotMatch } from 'assert';
 
 chai.use(chaiHttp);
 
@@ -22,6 +21,15 @@ async function makeUser() {
     username: 'tt_tt',
   });
 }
+
+describe('sequelize sync force', () => {
+  before(async () => {
+    await sequelize.sync({ force: true });
+  });
+  it('sequlize sync success', done => {
+    done();
+  });
+});
 
 describe('sign up test', () => {
   it('return value test', done => {
@@ -205,8 +213,8 @@ describe('test comment', () => {
               console.log('err3');
               done(err3);
             }
-            console.log(res3.body);
             expect(res3).to.have.status(201);
+            expect(res3.body.comment).to.equal('testing comment in recipe1');
             done();
           });
       });
