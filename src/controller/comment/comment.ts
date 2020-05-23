@@ -9,13 +9,15 @@ const mypage = async function(req: Request, res: Response) {
       (res): any => res
     );
     if (!user) {
-      return res.status(403).send('not valid user/ token');
+      return res
+        .status(403)
+        .send({ error: { message: 'not valid user/ token' } });
     }
     const recipe = await Recipes.findOne({ where: { id: recipeId } }).then(
       (res): any => res
     );
-    if (recipe) {
-      return res.status(403).send('not valid recipe');
+    if (!recipe) {
+      return res.status(403).send({ error: { message: 'not valid recipe' } });
     }
     Comments.create({
       userId: data,
