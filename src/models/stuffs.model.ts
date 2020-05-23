@@ -6,10 +6,13 @@ import {
   UpdatedAt,
   ForeignKey,
   BelongsToMany,
+  BelongsTo,
+  HasOne,
 } from 'sequelize-typescript';
 import Category from './category.model';
 import Users from './users.model';
 import UserStuff from './user_stuff.model';
+import StuffCategory from './stuff_category.model';
 
 @Table
 export default class Stuffs extends Model<Stuffs> {
@@ -22,10 +25,6 @@ export default class Stuffs extends Model<Stuffs> {
   @Column
   icon: string;
 
-  @ForeignKey(() => Category)
-  @Column
-  category: number;
-
   @CreatedAt
   createdAt: Date;
 
@@ -37,4 +36,10 @@ export default class Stuffs extends Model<Stuffs> {
     () => UserStuff
   )
   users: Users[];
+
+  @BelongsToMany(
+    () => Category,
+    () => StuffCategory
+  )
+  category: Category[];
 }

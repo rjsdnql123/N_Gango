@@ -1,11 +1,11 @@
-const express = require("express");
+const express = require('express');
 const router = express.Router();
 
-const { stuffController } = require("../controller");
+const { stuffController } = require('../controller');
 
-router.post("/category", stuffController.category);
+router.post('/category', stuffController.category);
 
-router.post("/stuff", stuffController.stuff);
+router.post('/stuff', stuffController.stuff);
 
 router.get('/stuffRecipe', stuffController.stuffRecipe)
 
