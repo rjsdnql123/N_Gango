@@ -35,16 +35,12 @@ export default class Recipes extends Model<Recipes> {
   @UpdatedAt
   updatedAt: Date;
 
-  @BelongsTo(() => Users)
+  @ForeignKey(() => Users)
   makeUser: Users;
 
   @HasMany(() => Comments)
   comments: Comments[];
 
-  @BelongsToMany(
-    () => Users,
-    () => Like,
-    'recipeId'
-  )
+  @BelongsToMany(() => Users, () => Like, "recipeId")
   likes: Users[];
 }
