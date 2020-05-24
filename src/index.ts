@@ -20,6 +20,12 @@ app.use('/mypage', jwtVerify, mypageRouter);
 app.use('/stuff', stuffRouter);
 app.use('/comment', jwtVerify, commentRouter);
 
+app.use('/', (req, res, next) => {
+  console.log(req.url);
+  console.log(req.method);
+  next();
+});
+
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send('Success');
 });

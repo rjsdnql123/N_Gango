@@ -11,17 +11,6 @@ import Stuffs from '../models/stuffs.model';
 
 chai.use(chaiHttp);
 
-async function deleteUser() {
-  Users.destroy({ where: { id: 1 } });
-}
-async function makeUser() {
-  Users.create({
-    email: 'test1@test',
-    password: 'password',
-    username: 'tt_tt',
-  });
-}
-
 describe('sequelize sync force', () => {
   before(async () => {
     await sequelize.sync({ force: true });
@@ -33,6 +22,16 @@ describe('sequelize sync force', () => {
 
 describe('sign up test', () => {
   it('return value test', done => {
+    chai
+      .request(app)
+      .get('/')
+      .end((err, res) => {
+        if (err) {
+          done(err);
+          return;
+        }
+        expect(res).to.have.status(200);
+      });
     chai
       .request(app)
       .post('/user/signup')
