@@ -19,7 +19,7 @@ const stuffRecipe = async function(req: Request, res: Response) {
         return res.status(403).send({error: {message: 'Bad request not'}})
       }
       const [result, created] = await StuffRecipe.findOrCreate({
-        where : {userId: user.id, stuffId: recipe.id}
+        where : {userId: user.id, recipeId: recipe.id}
       });
       if(!created) {
         await StuffRecipe.destroy({ where : {id: result.get('id')}});

@@ -3,6 +3,8 @@ import sequelize from '../../models';
 const { Stuffs, Category } = sequelize;
 //이부분은 포린키가아니라  값이 들어와야한다?
 const stuff = async function(req: Request, res: Response) {
+  console.log(req.body)
+  console.log('레시피')
   try {
     await Stuffs.findOrCreate({
       where: { stuffname: req.body.stuffname },
