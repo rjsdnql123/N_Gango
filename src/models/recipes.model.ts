@@ -17,7 +17,7 @@ import Like from './like.model';
 @Table
 export default class Recipes extends Model<Recipes> {
   @ForeignKey(() => Users)
-  @Column
+  @Column({ onDelete: 'SET NULL' })
   userId: number;
 
   @Column
