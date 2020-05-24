@@ -8,6 +8,8 @@ import { jwtVerify } from './middleware/jwt';
 const userRouter = require('./routes/user');
 const mypageRouter = require('./routes/mypage');
 const stuffRouter = require('./routes/stuff');
+const commentRouter = require('./routes/comment');
+const recipeRouter = require("./routes/recipe");
 const PORT = process.env.PORT || '3001';
 
 const app = express();
@@ -17,6 +19,14 @@ app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/mypage', jwtVerify, mypageRouter);
 app.use('/stuff', stuffRouter);
+app.use('/comment', jwtVerify, commentRouter);
+app.use("/recipe", recipeRouter);
+
+app.use('/', (req, res, next) => {
+  console.log(req.url);
+  console.log(req.method);
+  next();
+});
 
 app.get('/', (req: express.Request, res: express.Response) => {
   res.send('Success');

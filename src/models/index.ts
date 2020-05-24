@@ -3,7 +3,7 @@ require('dotenv').config();
 
 console.log(process.env.NODE_ENV);
 
-const sequelize = new Sequelize({
+export const sequelize = new Sequelize({
   logging: false,
   database: 'Njango',
   dialect: 'mysql',
@@ -12,6 +12,7 @@ const sequelize = new Sequelize({
   models: [__dirname + '/*.model.ts'], // or [Player, Team],
 });
 sequelize.sync({ force: false });
+
 
 
 export default sequelize.models;

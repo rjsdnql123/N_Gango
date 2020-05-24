@@ -4,8 +4,6 @@ const { Recipes, Users, Stuffs, StuffRecipe } = sequelize;
 
 const recipe = async function(req: Request, res: Response) {
     const { data, id } = req.body;
-    console.log(req.body)
-    console.log(data)
     try{
         const user = await Users.findOne({where: {id: data}}).then(
             (res): any => res
@@ -37,7 +35,7 @@ const recipe = async function(req: Request, res: Response) {
             where: {stuffId: stuff.id, recipeId: recipe.id }
         })
     }
-        return res.status(201).send({ response: true });
+        return res.status(201).send(result);
         
     } catch(error) {
         console.log(error)
