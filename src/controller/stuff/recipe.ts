@@ -13,7 +13,18 @@ const recipe = async function(req: Request, res: Response) {
         if (!user) {
           return res.status(403).send({ error: { message: "Bad request not user" } });
         }
-        const stuff = await Stuffs.findOne({ where: { id } }).then(
+        const recipe = await Recipes.create({
+          //   where: {name: req.body.name},
+          //   id: req.body.id,
+          userId: user.id,
+          name: req.body.name,
+          desc: req.body.desc,
+          image: req.body.image,
+          //   defaults: req.body,
+        }).then((res): any => res);
+        for(let i = 0; i < id.length; i++){
+            let stuffId = id[i]
+        const stuff = await Stuffs.findOne({ where: { id: stuffId } }).then(
           (res): any => res
         );
         if (!stuff) {
@@ -21,28 +32,15 @@ const recipe = async function(req: Request, res: Response) {
             .status(403)
             .send({ error: { message: "Bad request not stuff" } });
         }
-        const recipe = await Recipes.create({
-        //   where: {name: req.body.name},
-        //   id: req.body.id,
-          userId: user.id,
-          name: req.body.name,
-          desc: req.body.desc,
-          image: req.body.image
-        //   defaults: req.body,
-        })
-        .then(
-            (res): any => res
-        )
-        const [result, created] = await StuffRecipe.findOrCreate({
+        
+        var [result] = await StuffRecipe.findOrCreate({
             where: {stuffId: stuff.id, recipeId: recipe.id }
         })
-        if (!created) {
-          await StuffRecipe.destroy({ where: { id: result.get("id") } });
-          await res.status(201).send({ response: false });
-        }
+    }
         return res.status(201).send({ response: true });
         
     } catch(error) {
+        console.log(error)
         res.status(500).send('server error')
     }
 }
