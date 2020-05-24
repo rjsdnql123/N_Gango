@@ -35,7 +35,7 @@ export default class Recipes extends Model<Recipes> {
   @UpdatedAt
   updatedAt: Date;
 
-  @ForeignKey(() => Users)
+  @BelongsTo(() => Users)
   makeUser: Users;
 
   @HasMany(() => Comments)
