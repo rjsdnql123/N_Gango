@@ -41,10 +41,6 @@ export default class Recipes extends Model<Recipes> {
   @HasMany(() => Comments)
   comments: Comments[];
 
-  @BelongsToMany(
-    () => Users,
-    () => Like,
-    'recipeId'
-  )
+  @BelongsToMany(() => Users, () => Like, "recipeId")
   likes: Users[];
 }
