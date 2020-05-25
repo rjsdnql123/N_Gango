@@ -1,4 +1,5 @@
 module.exports = {
   recipe: require("./recipe"),
-  //   getrecipe: require("./getRecipe"),
+    getrecipe: require("./getRecipe"),
+  searchRecipe: require("./searchRecipe")
 };
