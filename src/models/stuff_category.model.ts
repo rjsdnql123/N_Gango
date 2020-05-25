@@ -23,7 +23,7 @@ export default class StuffCategory extends Model<StuffCategory> {
 
   @ForeignKey(() => Category)
   @Column
-  recipeId: number;
+  categoryId: number;
 
   @CreatedAt
   createdAt: Date;

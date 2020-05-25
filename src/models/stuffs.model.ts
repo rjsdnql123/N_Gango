@@ -20,7 +20,7 @@ export default class Stuffs extends Model<Stuffs> {
   stuffname: string;
 
   @Column
-  limitday: number;
+  limitDay: number;
 
   @Column
   icon: string;

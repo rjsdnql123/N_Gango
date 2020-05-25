@@ -1,19 +1,32 @@
 import { Request, Response } from 'express';
 import sequelize from '../../models';
-const { Stuffs, Category } = sequelize;
+const { Stuffs, Category, StuffCategory } = sequelize;
 //이부분은 포린키가아니라  값이 들어와야한다?
 const stuff = async function(req: Request, res: Response) {
-  console.log(req.body)
-  console.log('레시피')
+  const { stuffname, limitDay, icon, categoryName } = req.body;
+  console.log(req.body);
+  console.log('레시피');
   try {
+    const category = await Category.findOne({ where: { name: categoryName } });
+    if (category) {
+      res.status(404).send({ error: { massge: '카테고리를 설정해주세요 ' } });
+    }
     await Stuffs.findOrCreate({
       where: { stuffname: req.body.stuffname },
-      defaults: req.body,
+      defaults: {
+        stuffname,
+        limitDay,
+        icon,
+      },
     }).then(([result, created]) => {
       if (created) {
+        StuffCategory.create({
+          stuffId: result.get('id'),
+          categoryId: category.get('id'),
+        });
         res.status(200).send(result);
       } else {
-        res.status(404).send('이미 있는 재료');
+        res.status(404).send({ error: { message: '이미 있는 재료' } });
       }
     });
   } catch (err) {
