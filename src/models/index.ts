@@ -11,8 +11,8 @@ export const sequelize = new Sequelize({
   password: process.env.DB_PASSWORD,
   models: [__dirname + '/*.model.ts'], // or [Player, Team],
 });
-sequelize.sync({ force: false });
-
-
+if (process.env.NODE_ENV !== 'test') {
+  sequelize.sync({ force: false });
+}
 
 export default sequelize.models;
