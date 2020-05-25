@@ -6,7 +6,7 @@ const { Category, Stuffs } = sequelize;
 
 const categorySearch = async function(req: Request, res: Response) {
     try{
-      let search = req.body.name
+      let search = req.body.categoryName
       await Category.findAll({
           where: {
               name: {
@@ -15,13 +15,17 @@ const categorySearch = async function(req: Request, res: Response) {
           },
           include: [{model: Stuffs}]
       }).then(result => {
-          console.log(result)
+          if(result.length){
           res.status(200).send(result)
+          } else {
+              res.status(404).send({ error: { message: '카테고리와 일치하는거 없음' } })
+          }
       })
 
 
     }catch(error) {
         console.log(error)
+        res.status(500).send(error)
     }
 }
 module.exports = categorySearch

@@ -118,6 +118,47 @@
           }
         }
       ]
+    },
+    "searchcategory" :{
+      "endpoint": "/stuff/categorysearch",
+      "method": "get",
+      "request": {
+        "categoryName": "육류"
+      },
+      "results": [
+        {
+          "id": 1,
+          "categoryName": "육류",
+          "createdAt": "2020-05-25T05:19:33.000Z",
+          "updatedAt": "2020-05-25T05:19:33.000Z",
+          "stuffs": [
+            {
+              "id": 1,
+              "stuffname": "didvk",
+              "limitDay": "3day",
+              "icon": "icon",
+              "createdAt": "2020-05-25T05:20:02.000Z",
+              "updatedAt": "2020-05-25T05:20:02.000Z",
+              "StuffCategory": {
+                "id": 1,
+                "stuffId": 1,
+                "categoryId": 1,
+                "createdAt": "2020-05-25T05:20:02.000Z",
+                "updatedAt": "2020-05-25T05:20:02.000Z"
+              }
+            },"...."
+          ]
+        },
+        {
+          "status": 404,
+          "response": {
+            "error": {
+              "message": "카테고리와 일치하는거 없음."
+            },
+            "reason": "카테고리와 일치하는거 없음."
+          }
+        }
+      ]
     }
   },
   "recipe": {
