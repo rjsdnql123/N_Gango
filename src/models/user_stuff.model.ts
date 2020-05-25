@@ -25,6 +25,9 @@ export default class UserStuff extends Model<UserStuff> {
   @Column
   stuffId: number;
 
+  @Column
+  limitDay: Date;
+
   @CreatedAt
   createdAt: Date;
 

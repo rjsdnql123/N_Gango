@@ -4,7 +4,7 @@ const { Users, Comments, Recipes } = sequelize;
 
 const mypage = async function(req: Request, res: Response) {
   try {
-    const { data, recipeId, comment } = req.body;
+    const { data, recipeId, comment, rating } = req.body;
     const user = await Users.findOne({ where: { id: data } }).then(
       (res): any => res
     );
@@ -22,7 +22,8 @@ const mypage = async function(req: Request, res: Response) {
     Comments.create({
       userId: data,
       recipId: recipeId,
-      comment: comment,
+      comment,
+      rating,
     }).then(res1 => res.status(201).send(res1));
   } catch (error) {
     console.log(error);

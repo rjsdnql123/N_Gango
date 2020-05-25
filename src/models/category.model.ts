@@ -13,7 +13,7 @@ import StuffCategory from './stuff_category.model';
 
 @Table
 export default class Category extends Model<Category> {
-  @Column
+  @Column({ unique: true })
   name: string;
 
   @CreatedAt

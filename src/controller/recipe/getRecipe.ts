@@ -1,16 +1,23 @@
 import express, { Request, Response, NextFunction } from "express";
 import sequelize from "../../models";
-const { Recipes, Users, Stuffs, StuffRecipe } = sequelize;
+const { Recipes, Stuffs } = sequelize;
 
 const getRecipe = async function(req: Request, res: Response) {
+  let params = req.params.id.slice(1)
   try{
-    const recipe = await Recipes.findAll({ where: { name: req.body.name } }).then(
+    const recipe = await Recipes.findAll({ where: { id: params },
+    include: [{model: Stuffs}]
+    }).then(
       (res): any => res
     )
-    console.log(recipe[0],'reciep')
-    const stuffAndRecipe = StuffRecipe.findAll({where: {recipeId: recipe.id}})
-
+    if (!recipe) {
+      res.status(404).send('레시피가 없음')
+    } else {
+      res.status(200).send(recipe)
+    }
+    
   } catch(error){
+    console.log(error)
     res.status(500).send('server error')
   }
   }

@@ -6,6 +6,7 @@ import {
   ForeignKey,
   Column,
   BelongsTo,
+  DataType,
 } from 'sequelize-typescript';
 
 import Users from './users.model';
@@ -23,6 +24,9 @@ export default class Comments extends Model<Comments> {
 
   @Column
   comment: string;
+
+  @Column({ type: DataType.FLOAT })
+  rating: number;
 
   @CreatedAt
   createdAt: Date;
