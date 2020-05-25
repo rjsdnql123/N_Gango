@@ -197,7 +197,6 @@ describe('test comment', () => {
         }
         expect(res1).to.have.status(201);
         expect(typeof res1.body.token).to.equal('string');
-        // recipeId,comment
         agent
           .post('/comment')
           .send({

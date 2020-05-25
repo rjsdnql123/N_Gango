@@ -5,4 +5,5 @@ const { recipeController } = require('../controller');
 
 router.post('/', jwtVerify, recipeController.recipe);
 
+router.post('/like', jwtVerify, recipeController.like);
 module.exports = router;

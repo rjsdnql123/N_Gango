@@ -160,6 +160,26 @@
           }
         }
       ]
+    },
+    "like": {
+      "endpoint": "/recipe/like",
+      "method": "post",
+      "request": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE1OTAzNzQ2MjAsImV4cCI6MTU5MDM3ODIyMH0.0G0YJi8rfqARAPULjhnzpfLp5sa0V_d-1H814c-x7ys",
+        "recipeId": 3
+      },
+      "result": [
+        {
+          "status": 201,
+          "response": {
+            "id": 1,
+            "userId": 1,
+            "recipeId": 3,
+            "createdAt": "2020-05-25T05:41:04.000Z",
+            "updatedAt": "2020-05-25T05:41:04.000Z"
+          }
+        }
+      ]
     }
   },
   "comment": {
