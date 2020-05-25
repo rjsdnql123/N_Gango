@@ -9,4 +9,7 @@ router.post('/', jwtVerify, recipeController.recipe);
 router.get("/search", recipeController.searchRecipe)
 
 router.get('/getrecipe:id', recipeController.getrecipe)
+
+router.post('/like', jwtVerify, recipeController.like);
+
 module.exports = router;
