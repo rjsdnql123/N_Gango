@@ -14,7 +14,7 @@ const signin = async function(req: Request, res: Response) {
       },
     }).then((result): any => {
       if (!result) {
-        res.status(401).send('Bad Authentication data');
+        res.status(401).send({ error: { message: 'Bad Authentication data' } });
       }
       return result;
     });
@@ -23,7 +23,7 @@ const signin = async function(req: Request, res: Response) {
       res.status(201).send({ token: token });
     }
   } catch (error) {
-    res.status(500).send('server err');
+    res.status(500).send({ error: { message: 'server err' } });
   }
 };
 

@@ -1,0 +1,342 @@
+{
+  "users": {
+    "signin": {
+      "endpoint": "/user/signin",
+      "method": "get",
+      "request": {
+        "email": "test1@test",
+        "password": "password"
+      },
+      "results": {
+        "success": {
+          "status": 201,
+          "response": {
+            "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE1OTAzNzQ2MjAsImV4cCI6MTU5MDM3ODIyMH0.0G0YJi8rfqARAPULjhnzpfLp5sa0V_d-1H814c-x7ys"
+          }
+        },
+        "fail": [
+          {
+            "status": 401,
+            "response": { "error": { "message": "Bad Authentication data" } },
+            "reason": "email 과 password 가 일치하는 유저가 없다."
+          },
+          {
+            "status": 500,
+            "response": { "error": { "message": "server err" } },
+            "reason": "server error "
+          }
+        ]
+      }
+    },
+    "signup": {
+      "endpoint": "/user/signup",
+      "method": "post",
+      "request": {
+        "email": "test1@test",
+        "password": "password",
+        "username": "API_KIM"
+      },
+      "result": [
+        {
+          "status": 200,
+          "response": {
+            "id": 2,
+            "email": "test21@test",
+            "password": "30d45efaef2341ceb22ed83585d869a2c58b3e3f",
+            "username": "API_KIM",
+            "updatedAt": "2020-05-25T02:58:03.669Z",
+            "createdAt": "2020-05-25T02:58:03.669Z"
+          },
+          "reason": "email 중복."
+        },
+        {
+          "status": 404,
+          "response": {
+            "error": {
+              "message": "중복되는 email"
+            }
+          },
+          "reason": "email 중복."
+        },
+        { "status": 500 }
+      ]
+    }
+  },
+  "stuff": {
+    "makeCategory": {
+      "endpoint": "/stuff/category",
+      "method": "post",
+      "request": { "name": "육류" },
+      "results": [
+        {
+          "status": 200,
+          "response": {
+            "id": 1,
+            "name": "육류",
+            "createdAt": "2020-05-25T02:43:25.000Z",
+            "updatedAt": "2020-05-25T02:43:25.000Z"
+          }
+        },
+        {
+          "status": 404,
+          "response": {
+            "status": 404,
+            "response": { "error": { "message": "오류 발생" } },
+            "reason": "findOrCreate method 에서 결과값이 없다."
+          }
+        }
+      ]
+    },
+    "addStuff": {
+      "endpoint": "/stuff",
+      "method": "post",
+      "request": {
+        "stuffname": "소고기",
+        "limitDay": 3,
+        "icon": "https://image.flaticon.com/icons/svg/776/776450.svg",
+        "categoryName": "육류"
+      },
+      "results": [
+        {
+          "status": 200,
+          "response": {
+            "id": 2,
+            "stuffname": "소고기",
+            "limitDay": 3,
+            "icon": "https://image.flaticon.com/icons/svg/776/776450.svg",
+            "updatedAt": "2020-05-25T04:22:54.259Z",
+            "createdAt": "2020-05-25T04:22:54.259Z"
+          }
+        },
+        {
+          "status": 404,
+          "response": {
+            "error": {
+              "message": "카테고리를 설정해주세요 / 이미 있는 재료 입니다."
+            },
+            "reason": "category 값이 없거나 이미 중복되는 stuff name 이 있다."
+          }
+        }
+      ]
+    }
+  },
+  "recipe": {
+    "getRecipe": {
+      "endpoint": "/recipe",
+      "method": "get",
+      "request": {},
+      "results": []
+    },
+    "postRecipe": {
+      "endpoint": "/recipe",
+      "method": "post",
+      "request": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE1OTAzNzQ2MjAsImV4cCI6MTU5MDM3ODIyMH0.0G0YJi8rfqARAPULjhnzpfLp5sa0V_d-1H814c-x7ys",
+        "stuffs": ["돼지고기", "소고기"],
+        "name": "고기굽기",
+        "desc": "돼지고기와 소고기를 적절하게 굽는다.",
+        "image": "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile28.uf.tistory.com%2Fimage%2F154B62284B43090026BE1D"
+      },
+      "results": [
+        {
+          "status": 201,
+          "response": {
+            "id": 3,
+            "userId": 1,
+            "name": "고기굽기",
+            "desc": "돼지고기와 소고기를 적절하게 굽는다.",
+            "image": "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile28.uf.tistory.com%2Fimage%2F154B62284B43090026BE1D",
+            "updatedAt": "2020-05-25T04:41:06.390Z",
+            "createdAt": "2020-05-25T04:41:06.390Z"
+          }
+        },
+        {
+          "status": 403,
+          "response": {
+            "error": {
+              "message": "Bad request not [stuff, user]"
+            },
+            "reason": "존재하지 않는 [stuff, user] 이다."
+          }
+        }
+      ]
+    }
+  },
+  "comment": {
+    "getComment": {
+      "endpoint": "/comment",
+      "method": "get",
+      "request": {},
+      "results": []
+    },
+    "postComment": {
+      "endpoint": "/comment",
+      "method": "post",
+      "request": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE1OTAzNzQ2MjAsImV4cCI6MTU5MDM3ODIyMH0.0G0YJi8rfqARAPULjhnzpfLp5sa0V_d-1H814c-x7ys",
+        "recipeId": "3",
+        "comment": "고기는 언제나 맛있습니다.",
+        "rating": 0.5
+      },
+      "results": [
+        {
+          "status": 201,
+          "response": {
+            "id": 2,
+            "userId": 1,
+            "recipId": "3",
+            "comment": "고기는 언제나 맛있습니다.",
+            "rating": 0.5,
+            "updatedAt": "2020-05-25T04:49:59.324Z",
+            "createdAt": "2020-05-25T04:49:59.324Z"
+          }
+        },
+        {
+          "status": 403,
+          "response": {
+            "error": {
+              "message": "not valid [user, token, recipeId]"
+            },
+            "reason": "존재하지 않는 [user, recipe id] 이다."
+          }
+        }
+      ]
+    }
+  },
+  "mypage": {
+    "getMypage": {
+      "endpoint": "/mypage",
+      "method": "get",
+      "request": {
+        "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJkYXRhIjoxLCJpYXQiOjE1OTAzNzQ2MjAsImV4cCI6MTU5MDM3ODIyMH0.0G0YJi8rfqARAPULjhnzpfLp5sa0V_d-1H814c-x7ys"
+      },
+      "results": [
+        {
+          "status": 200,
+          "response": {
+            "id": 1,
+            "email": "test1@test",
+            "password": "30d45efaef2341ceb22ed83585d869a2c58b3e3f",
+            "username": "tt_tt",
+            "token": null,
+            "createdAt": "2020-05-25T04:19:20.000Z",
+            "updatedAt": "2020-05-25T04:19:20.000Z",
+            "followers": [],
+            "followings": [],
+            "stuffs": [
+              {
+                "id": 1,
+                "stuffname": "돼지고기",
+                "limitDay": 7,
+                "icon": null,
+                "createdAt": "2020-05-25T04:19:20.000Z",
+                "updatedAt": "2020-05-25T04:19:20.000Z",
+                "UserStuff": {
+                  "id": 1,
+                  "userId": 1,
+                  "stuffId": 1,
+                  "limitDay": "2020-05-25T07:07:20.000Z",
+                  "createdAt": "2020-05-25T04:19:20.000Z",
+                  "updatedAt": "2020-05-25T04:19:20.000Z"
+                },
+                "category": [
+                  {
+                    "id": 1,
+                    "name": "육류",
+                    "createdAt": "2020-05-25T04:19:20.000Z",
+                    "updatedAt": "2020-05-25T04:19:20.000Z",
+                    "StuffCategory": {
+                      "id": 1,
+                      "stuffId": 1,
+                      "categoryId": 1,
+                      "createdAt": "2020-05-25T04:19:20.000Z",
+                      "updatedAt": "2020-05-25T04:19:20.000Z"
+                    }
+                  }
+                ]
+              }
+            ],
+            "comments": [
+              {
+                "id": 1,
+                "userId": 1,
+                "recipId": 1,
+                "comment": "testing comment in recipe1",
+                "rating": 3.4,
+                "createdAt": "2020-05-25T04:19:20.000Z",
+                "updatedAt": "2020-05-25T04:19:20.000Z"
+              },
+              {
+                "id": 2,
+                "userId": 1,
+                "recipId": 3,
+                "comment": "고기는 언제나 맛있습니다.",
+                "rating": 0.5,
+                "createdAt": "2020-05-25T04:49:59.000Z",
+                "updatedAt": "2020-05-25T04:49:59.000Z"
+              }
+            ],
+            "recipes": [
+              {
+                "id": 1,
+                "userId": 1,
+                "name": "계란볶음밥",
+                "desc": "계란을 볶은뒤 밥을넣고 열심히 볶는다",
+                "image": "https://recipe1.ezmember.co.kr/cache/recipe/2018/04/04/833880e807106a8288be48259b19c4031.jpg",
+                "createdAt": "2020-05-25T04:19:20.000Z",
+                "updatedAt": "2020-05-25T04:19:20.000Z"
+              },
+              {
+                "id": 2,
+                "userId": 1,
+                "name": "고기굽기",
+                "desc": "돼지고기와 소고기를 적절하게 굽는다.",
+                "image": "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile28.uf.tistory.com%2Fimage%2F154B62284B43090026BE1D",
+                "createdAt": "2020-05-25T04:40:15.000Z",
+                "updatedAt": "2020-05-25T04:40:15.000Z"
+              },
+              {
+                "id": 3,
+                "userId": 1,
+                "name": "고기굽기",
+                "desc": "돼지고기와 소고기를 적절하게 굽는다.",
+                "image": "https://img1.daumcdn.net/thumb/R720x0.q80/?scode=mtistory2&fname=http%3A%2F%2Fcfile28.uf.tistory.com%2Fimage%2F154B62284B43090026BE1D",
+                "createdAt": "2020-05-25T04:41:06.000Z",
+                "updatedAt": "2020-05-25T04:41:06.000Z"
+              }
+            ],
+            "likes": []
+          }
+        },
+        {
+          "status": 404,
+          "response": { "error": { "message": "not valid user" } }
+        }
+      ]
+    },
+    "getComment": {
+      "endpoint": "/mypage/comment",
+      "method": "get",
+      "request": {},
+      "results": []
+    },
+    "getFollow": {
+      "endpoint": "/mypage/follow",
+      "method": "get",
+      "request": {},
+      "results": []
+    },
+    "getLike": {
+      "endpoint": "/mypage/Like",
+      "method": "get",
+      "request": {},
+      "results": []
+    },
+    "getStuff": {
+      "endpoint": "/mypage/stuff",
+      "method": "get",
+      "request": {},
+      "results": []
+    }
+  }
+}

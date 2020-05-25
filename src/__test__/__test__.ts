@@ -99,9 +99,8 @@ describe('add stuff test', () => {
   it('post stuff', done => {
     chai
       .request(app)
-      .post('/stuff/stuff')
-      // .send({ stuffname: '돼지고기', limitday: '7days', categoryId: 1 })
-      .send({ stuffname: '돼지고기', limitday: '7days' })
+      .post('/stuff')
+      .send({ stuffname: '돼지고기', limitDay: 7, categoryName: '육류' })
       .end((err, res) => {
         if (err) {
           done(err);
@@ -109,7 +108,6 @@ describe('add stuff test', () => {
         }
         expect(res).to.have.status(200);
         expect(res.body.stuffname).to.equal('돼지고기');
-        // expect(res.body.categoryId).to.equal(1);
         done();
       });
   });
@@ -206,6 +204,7 @@ describe('test comment', () => {
             token: res1.body.token,
             recipeId: 1,
             comment: 'testing comment in recipe1',
+            rating: 3.4,
           })
           .end((err3, res3) => {
             if (err3) {
