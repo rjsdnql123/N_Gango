@@ -13,6 +13,8 @@ import Category from './category.model';
 import Users from './users.model';
 import UserStuff from './user_stuff.model';
 import StuffCategory from './stuff_category.model';
+import Recipes from './recipes.model';
+import StuffRecipe from './stuff_recipe.model';
 
 @Table
 export default class Stuffs extends Model<Stuffs> {
@@ -36,6 +38,9 @@ export default class Stuffs extends Model<Stuffs> {
     () => UserStuff
   )
   users: Users[];
+
+  @BelongsToMany(() => Recipes, () => StuffRecipe)
+  recipe: Recipes[];
 
   @BelongsToMany(
     () => Category,

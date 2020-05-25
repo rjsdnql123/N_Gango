@@ -13,6 +13,8 @@ import {
 import Users from './users.model';
 import Comments from './comments.model';
 import Like from './like.model';
+import Stuffs from './stuffs.model';
+import StuffRecipe from './stuff_recipe.model';
 
 @Table
 export default class Recipes extends Model<Recipes> {
@@ -40,6 +42,9 @@ export default class Recipes extends Model<Recipes> {
 
   @HasMany(() => Comments)
   comments: Comments[];
+
+  @BelongsToMany(() => Stuffs, () => StuffRecipe)
+  stuff: Stuffs[];
 
   @BelongsToMany(() => Users, () => Like, "recipeId")
   likes: Users[];

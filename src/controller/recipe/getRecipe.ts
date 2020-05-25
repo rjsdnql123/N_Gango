@@ -1,13 +1,25 @@
-// import express, { Request, Response, NextFunction } from "express";
-// import sequelize from "../../models";
-// const { Recipes, Users, Stuffs, StuffRecipe } = sequelize;
+import express, { Request, Response, NextFunction } from "express";
+import sequelize from "../../models";
+const { Recipes, Stuffs } = sequelize;
 
-// const getRecipe = async function(req: Request, res: Response) {
-//   try{
+const getRecipe = async function(req: Request, res: Response) {
+  let params = req.params.id.slice(1)
+  try{
+    const recipe = await Recipes.findAll({ where: { id: params },
+    include: [{model: Stuffs}]
+    }).then(
+      (res): any => res
+    )
+    if (!recipe) {
+      res.status(404).send('레시피가 없음')
+    } else {
+      res.status(200).send(recipe)
+    }
     
-//   } catch(error){
-//     res.status(500).send('server error')
-//   }
-//   }
+  } catch(error){
+    console.log(error)
+    res.status(500).send('server error')
+  }
+  }
 
-// module.exports = getRecipe;
+module.exports = getRecipe;
