@@ -4,12 +4,12 @@ const { Stuffs, Category, StuffCategory } = sequelize;
 //이부분은 포린키가아니라  값이 들어와야한다?
 const stuff = async function(req: Request, res: Response) {
   const { stuffname, limitDay, icon, categoryName } = req.body;
-  console.log(req.body);
-  console.log('레시피');
   try {
     const category = await Category.findOne({ where: { name: categoryName } });
-    if (category) {
-      res.status(404).send({ error: { massge: '카테고리를 설정해주세요 ' } });
+    if (!category) {
+      return res
+        .status(404)
+        .send({ error: { massge: '카테고리를 설정해주세요 ' } });
     }
     await Stuffs.findOrCreate({
       where: { stuffname: req.body.stuffname },
@@ -24,13 +24,14 @@ const stuff = async function(req: Request, res: Response) {
           stuffId: result.get('id'),
           categoryId: category.get('id'),
         });
-        res.status(200).send(result);
+        return res.status(200).send(result);
       } else {
-        res.status(404).send({ error: { message: '이미 있는 재료' } });
+        return res.status(404).send({ error: { message: '이미 있는 재료' } });
       }
     });
   } catch (err) {
-    res.status(500).send('server err');
+    console.log(err);
+    return res.status(500).send('server err');
   }
 };
 

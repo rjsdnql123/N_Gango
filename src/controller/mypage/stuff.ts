@@ -23,7 +23,7 @@ const addStuff = async function(req: Request, res: Response) {
     }
     const [result, created] = await UserStuff.findOrCreate({
       where: { userId: user.id, stuffId: stuff.id },
-      defaults: { limitDay: Date.now() + stuff.limitday * 24 * 60 * 1000 },
+      defaults: { limitDay: Date.now() + stuff.limitDay * 24 * 60 * 1000 },
     });
     if (!created) {
       await UserStuff.update(
