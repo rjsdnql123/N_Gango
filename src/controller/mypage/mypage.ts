@@ -10,8 +10,8 @@ const mypage = async function(req: Request, res: Response) {
       include: [
         { model: Users, as: 'followers' },
         { model: Users, as: 'followings' },
-        Stuffs,
-        Comments,
+        { model: Stuffs },
+        { model: Comments },
         { model: Recipes, as: 'recipes' },
         { model: Recipes, as: 'likes' },
       ],
