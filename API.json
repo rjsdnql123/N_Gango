@@ -60,6 +60,53 @@
         },
         { "status": 500 }
       ]
+    },
+    "member": {
+      "endpoint": "/user/${username}",
+      "method": "get",
+      "request": {},
+      "results": {
+        "userRecipe": [{
+          "id": 1,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:39:43.000Z",
+          "updatedAt": "2020-05-25T05:39:43.000Z"
+        },
+        {
+          "id": 2,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:40:27.000Z",
+          "updatedAt": "2020-05-25T05:40:27.000Z"
+        }
+      ],
+      "userLike": [
+        [{
+          "id": 2,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:40:27.000Z",
+          "updatedAt": "2020-05-25T05:40:27.000Z"
+        }],
+        [{
+          "id": 1,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:39:43.000Z",
+          "updatedAt": "2020-05-25T05:39:43.000Z"
+        }]
+      ]
+      }
+    
     }
   },
   "stuff": {
@@ -115,6 +162,47 @@
               "message": "카테고리를 설정해주세요 / 이미 있는 재료 입니다."
             },
             "reason": "category 값이 없거나 이미 중복되는 stuff name 이 있다."
+          }
+        }
+      ]
+    },
+    "searchcategory" :{
+      "endpoint": "/stuff/categorysearch",
+      "method": "get",
+      "request": {
+        "categoryName": "육류"
+      },
+      "results": [
+        {
+          "id": 1,
+          "categoryName": "육류",
+          "createdAt": "2020-05-25T05:19:33.000Z",
+          "updatedAt": "2020-05-25T05:19:33.000Z",
+          "stuffs": [
+            {
+              "id": 1,
+              "stuffname": "didvk",
+              "limitDay": "3day",
+              "icon": "icon",
+              "createdAt": "2020-05-25T05:20:02.000Z",
+              "updatedAt": "2020-05-25T05:20:02.000Z",
+              "StuffCategory": {
+                "id": 1,
+                "stuffId": 1,
+                "categoryId": 1,
+                "createdAt": "2020-05-25T05:20:02.000Z",
+                "updatedAt": "2020-05-25T05:20:02.000Z"
+              }
+            },"...."
+          ]
+        },
+        {
+          "status": 404,
+          "response": {
+            "error": {
+              "message": "카테고리와 일치하는거 없음."
+            },
+            "reason": "카테고리와 일치하는거 없음."
           }
         }
       ]

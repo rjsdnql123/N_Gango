@@ -8,6 +8,6 @@ router.get("/signin", userController.signin);
 //회원가입
 router.post("/signup", userController.signup);
 
-
+router.get("/member/:id", userController.member)
 
 module.exports = router;
