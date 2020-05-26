@@ -60,6 +60,53 @@
         },
         { "status": 500 }
       ]
+    },
+    "member": {
+      "endpoint": "/user/${username}",
+      "method": "get",
+      "request": {},
+      "results": {
+        "userRecipe": [{
+          "id": 1,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:39:43.000Z",
+          "updatedAt": "2020-05-25T05:39:43.000Z"
+        },
+        {
+          "id": 2,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:40:27.000Z",
+          "updatedAt": "2020-05-25T05:40:27.000Z"
+        }
+      ],
+      "userLike": [
+        [{
+          "id": 2,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:40:27.000Z",
+          "updatedAt": "2020-05-25T05:40:27.000Z"
+        }],
+        [{
+          "id": 1,
+          "userId": 2,
+          "name": "dsasffd",
+          "desc": "desc",
+          "image": "asdf",
+          "createdAt": "2020-05-25T05:39:43.000Z",
+          "updatedAt": "2020-05-25T05:39:43.000Z"
+        }]
+      ]
+      }
+    
     }
   },
   "stuff": {
