@@ -1,8 +1,8 @@
-import express, { Request, Response, NextFunction } from 'express';
+import { Request, Response } from 'express';
 import sequelize from '../../models';
 const opSequelize = require("sequelize");
 const Op = opSequelize.Op
-const { Category, Stuffs, StuffRecipe } = sequelize;
+const { Category} = sequelize;
 
 const categorySearch = async function(req: Request, res: Response) {
     try{

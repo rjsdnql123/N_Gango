@@ -8,7 +8,7 @@ router.post('/', jwtVerify, recipeController.recipe);
 
 router.get("/search", recipeController.searchRecipe)
 
-router.get('/getrecipe:id', recipeController.getrecipe)
+router.get('/getrecipe:username', recipeController.getrecipe)
 
 router.post('/like', jwtVerify, recipeController.like);
 
