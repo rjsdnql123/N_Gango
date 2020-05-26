@@ -47,4 +47,5 @@ export default class Stuffs extends Model<Stuffs> {
     () => StuffCategory
   )
   category: Category[];
+  collate:'utf8_general_ci'
 }
