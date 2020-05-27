@@ -16,7 +16,7 @@ const stuff = async function(req: Request, res: Response) {
       defaults: {
         stuffname,
         limitDay,
-        icon,
+        // icon,
       },
     }).then(([result, created]) => {
       if (created) {
