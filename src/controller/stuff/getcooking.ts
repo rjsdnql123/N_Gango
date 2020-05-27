@@ -2,19 +2,20 @@ import { Request, Response } from 'express';
 import sequelize from '../../models';
 const { Recipes, Stuffs } = sequelize;
 
-const sutffJoinRecipe = async function(req:Request, res:Response) {
+const getCooking = async function(req:Request, res:Response) {
     try{
-      const stuff =  await Stuffs.findAll({
+      await Stuffs.findAll({
            where: { stuffname: req.body.stuffname },
            include:  [{model: Recipes}]
-      }).then(
-          (res): any => res
-      )
-      if(!stuff) {
+      }).then((result) => {
+        console.log(result)
+        if (result.length) {
           res.status(404).send('not Stuff')
-      } else{
-          res.status(200).send(stuff)
-      }
+        } else {
+          res.status(200).send(result)
+        }
+      })
+
 
 
     } catch(error) {
@@ -23,4 +24,4 @@ const sutffJoinRecipe = async function(req:Request, res:Response) {
     }
 }
 
-module.exports = sutffJoinRecipe
+module.exports = getCooking

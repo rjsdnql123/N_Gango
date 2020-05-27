@@ -3,5 +3,5 @@ module.exports = {
   stuff: require("./stuff"),
   stuffsearch: require("./stuffsearch"),
   categorySearch: require('./categorySearch'),
-  sutffJoinRecipe: require('./getcooking')
+  getcooking: require('./getcooking')
 };
