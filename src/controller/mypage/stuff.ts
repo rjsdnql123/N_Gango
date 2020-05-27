@@ -4,7 +4,8 @@ const { Users, Stuffs, UserStuff } = sequelize;
 
 const addStuff = async function(req: Request, res: Response) {
   try {
-    const { data, id } = req.body;
+    const { data, stuffname } = req.body;
+    
     const user = await Users.findOne({ where: { id: data } }).then(
       (res): any => res
     );
@@ -13,7 +14,7 @@ const addStuff = async function(req: Request, res: Response) {
         .status(403)
         .send({ error: { message: 'Bad request not user' } });
     }
-    const stuff = await Stuffs.findOne({ where: { id } }).then(
+    const stuff = await Stuffs.findOne({ where: { stuffname: stuffname } }).then(
       (res): any => res
     );
     if (!stuff) {
