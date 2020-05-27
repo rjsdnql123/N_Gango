@@ -15,7 +15,6 @@ const PORT = process.env.PORT || '3001';
 const API = require('./API')
 
 const app = express();
-app.use(cors());
 app.use(
   cors({
     origin: ['*'],
