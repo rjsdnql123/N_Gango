@@ -8,7 +8,7 @@ export async function jwtVerify(
   next: NextFunction
 ): Promise<void | Response> {
   try {
-    const { token } = req.body;
+    const { token }: any = req.query;
     if (!token) {
       return res.status(404).send({ error: { message: 'Login require' } });
     }
