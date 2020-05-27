@@ -13,10 +13,17 @@ const commentRouter = require('./routes/comment');
 const recipeRouter = require("./routes/recipe");
 const PORT = process.env.PORT || '3001';
 const API = require('./API')
-const fetch = require("node-fetch");
 
 const app = express();
 app.use(cors());
+app.use(
+  cors({
+    origin: ['*'],
+    methods: ['GET', 'POST'],
+  })
+);
+
+
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
