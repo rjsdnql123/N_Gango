@@ -6,7 +6,6 @@ const { Users } = sequelize;
 
 const signin = async function(req: Request, res: Response) {
   try {
-    console.log(req.body.email);
     const user = await Users.findOne({
       where: {
         email: req.body.email,
