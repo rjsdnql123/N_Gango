@@ -4,6 +4,7 @@ const { Users } = sequelize;
 
 const signup = async function(req: Request, res: Response) {
   try {
+    console.log(req.body);
     await Users.findOrCreate({
       where: { email: req.body.email },
       defaults: req.body,
