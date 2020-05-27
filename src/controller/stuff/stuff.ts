@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import sequelize from '../../models';
 const { Stuffs, Category, StuffCategory } = sequelize;
-//이부분은 포린키가아니라  값이 들어와야한다?
+
 const stuff = async function(req: Request, res: Response) {
   const { stuffname, limitDay, icon, categoryName } = req.body;
   try {
@@ -16,7 +16,7 @@ const stuff = async function(req: Request, res: Response) {
       defaults: {
         stuffname,
         limitDay,
-        // icon,
+        icon,
       },
     }).then(([result, created]) => {
       if (created) {
