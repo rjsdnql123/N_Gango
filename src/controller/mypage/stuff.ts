@@ -25,16 +25,14 @@ const addStuff = async function(req: Request, res: Response) {
     }
     const [result, created] = await UserStuff.findOrCreate({
       where: { userId: user.id, stuffId: stuff.id },
-      defaults: { limitDay: Date.now() + stuff.limitDay * 24 * 60 * 1000 },
     });
     if (!created) {
-      await UserStuff.update(
-        { limitDay: Date.now() + stuff.limitday * 24 * 60 * 1000 },
-        { where: { id: result.get('id') } }
-      );
+      await UserStuff.destroy({
+        where: { userId: user.id, stuffId: stuff.id },
+      });
       await res.status(201).send({ response: false });
     }
-    return res.status(201).send({ response: true });
+    return res.status(201).send({ response: stuff });
   } catch (error) {
     console.log(error);
     return res.status(500).send('server error');
