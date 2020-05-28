@@ -5,7 +5,8 @@ const { Users, Stuffs, UserStuff } = sequelize;
 const addStuff = async function(req: Request, res: Response) {
   try {
     const { data, stuffname } = req.body;
-    
+    console.log(data, stuffname);
+
     const user = await Users.findOne({ where: { id: data } }).then(
       (res): any => res
     );
@@ -14,9 +15,9 @@ const addStuff = async function(req: Request, res: Response) {
         .status(403)
         .send({ error: { message: 'Bad request not user' } });
     }
-    const stuff = await Stuffs.findOne({ where: { stuffname: stuffname } }).then(
-      (res): any => res
-    );
+    const stuff = await Stuffs.findOne({
+      where: { stuffname: stuffname },
+    }).then((res): any => res);
     if (!stuff) {
       return res
         .status(403)
@@ -24,16 +25,14 @@ const addStuff = async function(req: Request, res: Response) {
     }
     const [result, created] = await UserStuff.findOrCreate({
       where: { userId: user.id, stuffId: stuff.id },
-      defaults: { limitDay: Date.now() + stuff.limitDay * 24 * 60 * 1000 },
     });
     if (!created) {
-      await UserStuff.update(
-        { limitDay: Date.now() + stuff.limitday * 24 * 60 * 1000 },
-        { where: { id: result.get('id') } }
-      );
-      await res.status(201).send({ response: false });
+      await UserStuff.destroy({
+        where: { userId: user.id, stuffId: stuff.id },
+      });
+      return res.status(201).send({ response: false });
     }
-    return res.status(201).send({ response: true });
+    return res.status(201).send({ response: stuff });
   } catch (error) {
     console.log(error);
     return res.status(500).send('server error');
