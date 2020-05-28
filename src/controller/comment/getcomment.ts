@@ -20,4 +20,4 @@ const getcomment = async function(req:Request, res: Response) {
         res.status(500).send({error: 'server error'})
     }
 }
-module.exports = getcomment
+module.exports = getcomment;

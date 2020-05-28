@@ -14,16 +14,14 @@ const recipe = async function(req: Request, res: Response) {
         .send({ error: { message: 'Bad request not user' } });
     }
     const recipe = await Recipes.create({
-      //   where: {name: req.body.name},
-      //   id: req.body.id,
       userId: data,
       name,
       desc,
       image,
-      //   defaults: req.body,
     }).then((res): any => res);
     for (let i = 0; i < stuffs.length; i++) {
       let stuffName = stuffs[i];
+      
       const stuff = await Stuffs.findOne({
         where: { stuffName: stuffName },
       }).then((res): any => res);
