@@ -2,21 +2,19 @@ import { Request, Response } from 'express';
 import sequelize from '../../models';
 const { Recipes, Stuffs } = sequelize;
 
-const getCooking = async function(req:Request, res:Response) {
+const getCooking = async function(req:any, res:Response) {
     try{
+      const stuffs =req.query.stuffname
+      const arr:any = [];
+      for(let i = 0; i <stuffs.length; i++){
+      let { stuffname } = JSON.parse(req.query.stuffname[i])
+      console.log(stuffname)
       await Stuffs.findAll({
-           where: { stuffname: req.body.stuffname },
+           where: { stuffname: stuffname },
            include:  [{model: Recipes}]
-      }).then((result) => {
-        console.log(result)
-        if (result.length) {
-          res.status(404).send('not Stuff')
-        } else {
-          res.status(200).send(result)
-        }
-      })
-
-
+      }).then((res:any) => arr.push(res))
+      }
+      res.status(200).send(arr[0])
 
     } catch(error) {
       console.log(error)

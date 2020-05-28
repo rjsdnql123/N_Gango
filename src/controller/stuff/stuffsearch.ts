@@ -6,7 +6,7 @@ const { Stuffs } = sequelize;
 
 const stuffsearch = async function(req: Request, res: Response) {
   const { stuffname } = req.query;
-  console.log(stuffname);
+  console.log(req.query.stuffname);
   try {
     await Stuffs.findAll({
       where: { 
