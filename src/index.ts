@@ -28,7 +28,7 @@ app.use(bodyParser.json());
 app.use('/user', userRouter);
 app.use('/mypage', jwtVerify, mypageRouter);
 app.use('/stuff', stuffRouter);
-app.use('/comment', jwtVerify, commentRouter);
+app.use('/comment', commentRouter);
 app.use('/recipe', recipeRouter);
 
 app.use('/', (req, res, next) => {

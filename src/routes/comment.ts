@@ -1,8 +1,9 @@
 import express from 'express';
+import { jwtVerify } from '../middleware/jwt';
 const router = express.Router();
 const { commentController } = require('../controller');
 
-router.post('/', commentController.comment);
-router.get('/', commentController.comment);
+router.post('/', jwtVerify, commentController.comment);
+router.get('/get', commentController.getcomment);
 
 module.exports = router;
