@@ -15,7 +15,7 @@ const getCooking = async function(req:any, res:Response) {
       }).then((res:any) => arr.push(res))
       }
       if(arr[0].length) {
-        res.status(200).send(arr)
+        res.status(200).send(arr[0])
       } else{
         res.status(404).send('not stuff')
       }
