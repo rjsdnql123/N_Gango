@@ -1,5 +1,7 @@
 import express, { Request, Response, NextFunction } from 'express';
 import sequelize from '../../models';
+const opSequelize = require("sequelize");
+const Op = opSequelize.Op
 const { Stuffs } = sequelize;
 
 const stuffsearch = async function(req: Request, res: Response) {
@@ -7,7 +9,11 @@ const stuffsearch = async function(req: Request, res: Response) {
   console.log(stuffname);
   try {
     await Stuffs.findAll({
-      where: { stuffname: stuffname },
+      where: { 
+        stuffname: {
+          [Op.like]: "%"+stuffname+"%"
+        }
+       },
     }).then(result => {
       if (result.length) {
         res.status(200).send(result);
