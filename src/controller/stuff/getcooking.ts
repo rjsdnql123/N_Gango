@@ -14,7 +14,11 @@ const getCooking = async function(req:any, res:Response) {
            include:  [{model: Recipes}]
       }).then((res:any) => arr.push(res))
       }
-      res.status(200).send(arr[0])
+      if(arr[0].length) {
+        res.status(200).send(arr)
+      } else{
+        res.status(404).send('not stuff')
+      }
 
     } catch(error) {
       console.log(error)
