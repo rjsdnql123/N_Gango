@@ -30,7 +30,7 @@ const addStuff = async function(req: Request, res: Response) {
       await UserStuff.destroy({
         where: { userId: user.id, stuffId: stuff.id },
       });
-      await res.status(201).send({ response: false });
+      return res.status(201).send({ response: false });
     }
     return res.status(201).send({ response: stuff });
   } catch (error) {

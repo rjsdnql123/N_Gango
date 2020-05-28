@@ -4,8 +4,13 @@ const { Stuffs, Category, StuffCategory } = sequelize;
 
 const stuff = async function(req: Request, res: Response) {
   const { stuffname, limitDay, icon, categoryName } = req.body;
+  console.log(req.url);
+  console.log(req.body);
+  console.log(stuffname, limitDay, icon, categoryName);
   try {
-    const category = await Category.findOne({ where: { name: categoryName } });
+    const category = await Category.findOrCreate({
+      where: { name: categoryName },
+    }).then(([res, create]) => res);
     if (!category) {
       return res
         .status(404)
