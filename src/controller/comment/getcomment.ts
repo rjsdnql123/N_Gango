@@ -4,11 +4,7 @@ const {Comments } = sequelize;
 
 const getcomment = async function(req:Request, res: Response) {
     const {recipeId} = req.body
-    console.log(recipeId)
     try{
-    //   const getRecipe = await Recipes.findAll({
-    //       where: {recipeId: recipeId}
-    //   }).then((res) => res)
       await Comments.findAll({
           where: {recipId: recipeId}
       }).then((result) => {
