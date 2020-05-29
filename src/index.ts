@@ -15,14 +15,7 @@ const PORT = process.env.PORT || '3001';
 const API = require('./API');
 
 const app = express();
-app.use(
-  cors({
-    origin: ['http://localhost:3000'],
-    methods: ['GET', 'POST'],
-    credentials: true,
-  })
-);
-
+app.use(cors({ credentials: true, origin: true }));
 app.use(bodyParser.json());
 
 app.use('/user', userRouter);
