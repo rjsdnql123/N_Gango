@@ -8,6 +8,7 @@ import {
   HasMany,
   BelongsToMany,
   BelongsTo,
+  DataType,
 } from 'sequelize-typescript';
 
 import Users from './users.model';
@@ -25,7 +26,7 @@ export default class Recipes extends Model<Recipes> {
   @Column
   name: string;
 
-  @Column
+  @Column({ type: DataType.TEXT })
   desc: string;
 
   @Column

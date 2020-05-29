@@ -12,7 +12,7 @@ export const sequelize = new Sequelize({
   models: [__dirname + '/*.model.ts'], // or [Player, Team],
 });
 if (process.env.NODE_ENV !== 'test') {
-  sequelize.sync({ force: false });
+  sequelize.sync({ force: true });
 }
 
 export default sequelize.models;
