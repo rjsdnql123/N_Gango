@@ -1,6 +1,6 @@
 import { Request, Response } from 'express';
 import sequelize from '../../models';
-const { Recipes, Stuffs } = sequelize;
+const { Recipes, Stuffs, Users } = sequelize;
 
 const getCooking = async function(req: any, res: Response) {
   try {
@@ -11,7 +11,9 @@ const getCooking = async function(req: any, res: Response) {
       console.log(stuffname);
       await Stuffs.findAll({
         where: { stuffname: stuffname },
-        include: [{ model: Recipes, include: [Stuffs] }],
+        include: [
+          { model: Recipes, include: [Stuffs, { model: Users, as: 'likes' }] },
+        ],
       }).then((res: any) => arr.push(res));
     }
     if (arr[0].length) {
